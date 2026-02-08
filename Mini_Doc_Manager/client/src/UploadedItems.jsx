@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import { fetchUploadedFiles } from "./services/api";
 import styles from "./UploadedItems.module.css";
 
-function UploadedItems({ refreshToken }) {
+
+// logic to paginate and sort and search on frontend
+function UploadedItems({ refresh }) {
   const [files, setFiles] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -11,6 +13,7 @@ function UploadedItems({ refreshToken }) {
   const [sortOrder, setSortOrder] = useState("desc");
   const LIMIT = 5;
 
+  
   const fetchFiles = (page, searchTerm, sort) => {
     setLoading(true);
     fetchUploadedFiles(page, LIMIT, searchTerm, sort, sort)
@@ -28,7 +31,7 @@ function UploadedItems({ refreshToken }) {
 
   useEffect(() => {
     fetchFiles(currentPage, search, sortOrder);
-  }, [currentPage, refreshToken, search, sortOrder]);
+  }, [currentPage, refresh, search, sortOrder]);
 
   const handlePrev = () => {
     if (currentPage > 1) setCurrentPage((prev) => prev - 1);

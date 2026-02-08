@@ -4,13 +4,12 @@ import UploadedItems from "./UploadedItems";
 import FileUpload from "./FileUpload";
 
 function App() {
-  const [refreshToken, setRefreshToken] = useState(0);
+  const [refresh, setRefresh] = useState(0);
   // this is a callback function that will be called when the upload is successful
-  // it will increment the refreshToken by 1
-  // this will cause the UploadedItems component to re-render
-  // and fetch the new files
+  // it will increment the refresh by 1
+  // triggers useEffect and re renders
   const handleUploadSuccess = () => {
-    setRefreshToken((prev) => prev + 1);
+    setRefresh((prev) => prev + 1);
   };
 
   return (
@@ -20,7 +19,7 @@ function App() {
       </div>
       <FileUpload onUploadSuccess={handleUploadSuccess} />
 
-      <UploadedItems refreshToken={refreshToken} />
+      <UploadedItems refresh={refresh} />
     </>
   );
 }
