@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { uploadFiles } from "./services/api.ts";
+import { uploadFiles } from "./services/api";
 
 function FileUpload({ onUploadSuccess }) {
   const [files, setFiles] = useState([]);
