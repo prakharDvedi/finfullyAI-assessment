@@ -15,7 +15,6 @@ function UploadedItems({ refreshToken }) {
     setLoading(true);
     fetchUploadedFiles()
       .then((data) => {
-        // Backend now returns a simple array of files
         setFiles(data);
         setLoading(false);
       })
