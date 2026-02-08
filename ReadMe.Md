@@ -106,15 +106,15 @@
 Mini_Doc_Manager/
 ├── client/                 # Frontend
 │   ├── src/
-│   │   ├── components/     # (Implicit in source)
-│   │   ├── services/       # API wrappers
-│   │   ├── Appjsx         # Main Component
+│   │   ├── components/     
+│   │   ├── services/       # API
+│   │   ├── App.jsx         # Main Component
 │   │   └── mainjsx        # Entry Point
 │   └── packagejson
 └── server/                 # Backend
-    ├── services/           # Business logic (fileServicejs)
-    ├── uploads/            # File storage (gitignored)
-    ├── utils/              # Helpers (search, sort, pagination)
-    ├── indexjs            # Entry point & Route definitions
-    └── packagejson
+    ├── services/           # business logic fileService.js
+    ├── uploads/            # File storage 
+    ├── utils/              # sort search filter
+    ├── index.js            # Entry point & routing
+    └── package.json
 ```
