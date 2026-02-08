@@ -1,4 +1,5 @@
 # Mini Document Manager
+<img width="1443" height="876" alt="image" src="https://github.com/user-attachments/assets/f5e09b75-ec0d-4cbc-b3af-ebca944c2b7d" />
 
 ##  Architecture
 
