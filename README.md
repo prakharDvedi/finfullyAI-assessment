@@ -14,6 +14,74 @@
 - **Framework**: React
 
 ---
+# DESIGN QUESTIONS
+
+## 1. Multiple Uploads
+
+**How does your system handle uploading multiple documents?**
+
+* One request or many?
+* Any limits or tradeoffs?
+
+**ANS -**
+using multer's multipart/formdata which accepts an array of files and in a single call it gets uploaded to the backend endpoint
+
+limits would be that if a large file is uploaded it can increase time as it is done in a single request but for medium to small scale things like document uplaod or image upload it is fine
+
+in future chunking of some sort can be implemented for bigger data types like mp3
+
+---
+
+## 2. Streaming
+
+**Why is streaming important for upload/download?**
+**What problems occur if the server loads the full file into memory?**
+
+**ANS-**
+the reason why streaming is importnat is becuase of the nature of how files are uplaaoded or rendered
+normally it is done by creating and bringing a copy of it to the RAM . This cause a spike on the server load as it is now having 2 copies.
+imagine a large data and double of it will slow down the system hence chunking and piping is done so that we can have it rendered slowly and partially while the user slowly interacts and waits for it
+
+---
+
+## 3. Moving to S3
+
+**If files move to object storage (e.g., S3):**
+
+* What changes in your backend?
+* Would the backend still handle file bytes?
+
+**ANS -**
+if we move it to S3 some endpoints will change such as the fetching and downloading file paths
+but also it can now only store metadata not the object itself unlike local storage
+backend will now generate URLs and it will be uplaoded to the S3 bucket and then rendered and streamed from that URL link itself
+so no raw file bytes but authenticated and protected metadata ---- this will help in scalability
+
+---
+
+## 4. Frontend UX
+
+**If you had more time:**
+
+* How would you add document preview?
+* How would you show upload progress?
+
+i can take a snapshot or some sort of thumbnail webp file image in order to do this.
+for text we can just read and fetch it inline
+for pdf or text im not exactly sure but we can use iframe of similar way. there are some libraries for it
+
+
+for upload progress we can have Axios
+and then show success or failure at end
+
+---
+
+## TradeOffs due to time limit
+- limited safety (checks only type and size)
+- poor frontend
+- no auth
+- stored in local storage O(n) or more complex for uplaoding and rendering can use some SQL type db for faster reads and writes
+- can cause issue if 100s of file hence limited to 10 only that too 5mb - (because multer pushes in single request)
 
 ## Backend Endpoints & Logic
 
@@ -123,64 +191,3 @@ Mini_Doc_Manager/
 
 ---
 
-# DESIGN QUESTIONS
-
-## 1. Multiple Uploads
-
-**How does your system handle uploading multiple documents?**
-
-* One request or many?
-* Any limits or tradeoffs?
-
-**ANS -**
-using multer's multipart/formdata which accepts an array of files and in a single call it gets uploaded to the backend endpoint
-
-limits would be that if a large file is uploaded it can increase time as it is done in a single request but for medium to small scale things like document uplaod or image upload it is fine
-
-in future chunking of some sort can be implemented for bigger data types like mp3
-
----
-
-## 2. Streaming
-
-**Why is streaming important for upload/download?**
-**What problems occur if the server loads the full file into memory?**
-
-**ANS-**
-the reason why streaming is importnat is becuase of the nature of how files are uplaaoded or rendered
-normally it is done by creating and bringing a copy of it to the RAM . This cause a spike on the server load as it is now having 2 copies.
-imagine a large data and double of it will slow down the system hence chunking and piping is done so that we can have it rendered slowly and partially while the user slowly interacts and waits for it
-
----
-
-## 3. Moving to S3
-
-**If files move to object storage (e.g., S3):**
-
-* What changes in your backend?
-* Would the backend still handle file bytes?
-
-**ANS -**
-if we move it to S3 some endpoints will change such as the fetching and downloading file paths
-but also it can now only store metadata not the object itself unlike local storage
-backend will now generate URLs and it will be uplaoded to the S3 bucket and then rendered and streamed from that URL link itself
-so no raw file bytes but authenticated and protected metadata ---- this will help in scalability
-
----
-
-## 4. Frontend UX
-
-**If you had more time:**
-
-* How would you add document preview?
-* How would you show upload progress?
-
-i can take a snapshot or some sort of thumbnail webp file image in order to do this.
-for text we can just read and fetch it inline
-for pdf or text im not exactly sure but we can use iframe of similar way. there are some libraries for it
-
-
-for upload progress we can have Axios
-and then show success or failure at end
-
----
