@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/prakharDvedi/finfullyAI-assessment#readme",
   "dependencies": {
+    "cors": "^2.8.6",
     "express": "^5.2.1",
+    "multer": "^2.0.2",
     "react": "^19.2.4"
   }
 }
