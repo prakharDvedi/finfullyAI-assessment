@@ -19,8 +19,16 @@ export const uploadFiles = async (files) => {
   return response.json();
 };
 
-export const fetchUploadedFiles = async () => {
-  const response = await fetch(`${API_URL}/files`);
+export const fetchUploadedFiles = async (page, limit, search, sort, order) => {
+  const query = new URLSearchParams({
+    page,
+    limit,
+    search: search || "",
+    sort: "date",
+    order: order || "desc",
+  }).toString();
+
+  const response = await fetch(`${API_URL}/files?${query}`);
   if (!response.ok) throw new Error("Failed to fetch files");
   return response.json();
 };

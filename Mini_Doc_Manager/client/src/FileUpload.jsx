@@ -22,6 +22,7 @@ function FileUpload({ onUploadSuccess }) {
       setUploadStatus("");
       setIsUploading(true);
 
+      // Artificial delay to show loading state
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       const data = await uploadFiles(files);

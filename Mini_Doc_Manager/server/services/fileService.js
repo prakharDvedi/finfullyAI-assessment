@@ -3,6 +3,7 @@ const path = require("path");
 
 const UPLOADS_DIR = path.join(__dirname, "../uploads");
 
+// Ensure uploads directory exists
 if (!fs.existsSync(UPLOADS_DIR)) {
   fs.mkdirSync(UPLOADS_DIR);
 }
@@ -31,7 +32,7 @@ const listAllFiles = () => {
             return null;
           }
         })
-        .filter(Boolean);
+        .filter(Boolean); // Filter out nulls if any file stat failed
 
       resolve(fileObjects);
     });
